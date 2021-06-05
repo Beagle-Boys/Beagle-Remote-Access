@@ -32,6 +32,6 @@ init();
 var socket = io();
 socket.on('connect', function() {
     VideoElement.addEventListener("mousemove", (e)=> {
-        socket.emit('m_k', {x: e.clientX, y: e.clientY, h: VideoElement.height, w: VideoElement.width});
-    })
+        socket.emit('m_k', {x: e.clientX - VideoElement.offsetLeft, y: e.clientY - VideoElement.offsetTop, h: VideoElement.height, w: VideoElement.width});
+    });
 });

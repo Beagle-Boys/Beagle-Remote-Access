@@ -2,3 +2,4 @@ numpy
 pyautogui
 opencv-python
 flask
+flask_socketio

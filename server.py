@@ -3,12 +3,17 @@ import pyautogui
 from src.recorder.Recorder import VideoStream
 from src.utils.utils import timed_call, genVideoFeed
 from flask_socketio import SocketIO, emit
+from engineio.payload import Payload
+from src.controls.Controller import Controller
+
+Payload.max_decode_packets = 500
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 stream = VideoStream()
+controller = Controller()
 
 FPS = 30
 
@@ -27,10 +32,8 @@ def get_res():
 
 @socketio.on('m_k')
 def handle_my_custom_event(data):
-    print(str(data))
     r = stream.getRes()
-    pyautogui.moveTo(data['x'] * ( r[0] / data['h'] ), data['y'] * ( r[1] / data['w'] ) )
-    #print('received json: ' + str(data))
+    controller.mouse(r,data)
 
 if __name__ == "__main__":
     socketio.run(app, debug=True, host='0.0.0.0')
