@@ -28,3 +28,10 @@ function init() {
 }
 
 init();
+
+var socket = io();
+socket.on('connect', function() {
+    VideoElement.addEventListener("mousemove", (e)=> {
+        socket.emit('m_k', {x: e.clientX, y: e.clientY, h: VideoElement.height, w: VideoElement.width});
+    })
+});
