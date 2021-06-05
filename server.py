@@ -37,7 +37,6 @@ def hook():
 @app.route("/", methods=['GET'])
 def home():
     global authenticated
-    print('authenticated',authenticated)
     if not authenticated:
         return redirect('/login')
     return render_template('index.html')
