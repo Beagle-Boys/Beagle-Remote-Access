@@ -1,0 +1,5 @@
+MAX_DECODE_PACKETS = 500
+
+COOKIE_MAX_AGE = 10 * 60 # 10 mintes
+
+FPS = 30

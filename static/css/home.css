@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #353535;
+  font-family: sans-serif;
+}
+
+#frame {
+  width: 100vw;
+  height: auto;
+}
+
+header {
+  color: white;
+  background-color: #372828;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  justify-content: space-between;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+header svg {
+  width: 20px;
+  height: 20px;
+}
+
+header svg, header a {
+  color: white;
+}

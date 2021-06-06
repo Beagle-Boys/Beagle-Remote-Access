@@ -4,8 +4,6 @@ const RESOLUTION = {}
 function updateResolution(x = 1080, y = 720) {
     RESOLUTION['x'] = x;
     RESOLUTION['y'] = y;
-    //VideoElement.style.width = `${x}px`;
-    //VideoElement.style.height = `${y}px`;
 }
 
 function getResolution() {
