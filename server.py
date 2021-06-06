@@ -6,7 +6,7 @@ from engineio.payload import Payload
 from src.controls.Controller import Controller
 from src.authentication.Auth import Auth
 from config import MAX_DECODE_PACKETS , COOKIE_MAX_AGE , FPS
-
+from src.audio.Audio import Audio
 
 Payload.max_decode_packets = MAX_DECODE_PACKETS
 
@@ -109,12 +109,16 @@ def handle_mouse_move(data):
 
 @socketio.on('mouse_click')
 def handle_mouse_click(data):
-    r = stream.getRes()
     if(data['press'] == 'd'):
-        controller.mouse_click_down(r, data)
+        controller.mouse_click_down(data)
     else:
-        controller.mouse_click_up(r, data)
+        controller.mouse_click_up(data)
 
+@app.route('/audio')
+def stream_audio():
+    audio_stream = Audio()
+    return Response(audio_stream.getStream(),mimetype='audio/wav')
+    
 
 @socketio.on('keyboard')
 def handle_key_press(data):

@@ -35,26 +35,30 @@ socket.on('connect', function() {
     VideoElement.addEventListener("mousemove", (e)=> {
         cur_m_m = Date.now()
         if(cur_m_m - la_m_m > (1000/cps) ) {
-            socket.emit('mouse_move', { x: e.clientX - VideoElement.offsetLeft, y: e.clientY - VideoElement.offsetTop, h: VideoElement.height, w: VideoElement.width,});
+            socket.emit('mouse_move', { x: e.clientX - VideoElement.offsetLeft + scrollX, y: e.clientY - VideoElement.offsetTop + scrollY, h: VideoElement.height, w: VideoElement.width,});
         }
         la_m_m = cur_m_m
     });
 
     VideoElement.addEventListener("mousedown", (e)=> {
-        socket.emit('mouse_click', {press: 'd', button: e.button, x: e.clientX - VideoElement.offsetLeft, y: e.clientY - VideoElement.offsetTop, h: VideoElement.height, w: VideoElement.width,});
-    })
+        socket.emit('mouse_click', {press: 'd', button: e.button, h: VideoElement.height, w: VideoElement.width,});
+       e.preventDefault(); 
+    });
 
     VideoElement.addEventListener("mouseup", (e)=> {
-        socket.emit('mouse_click', {press: 'u', button: e.button, x: e.clientX - VideoElement.offsetLeft, y: e.clientY - VideoElement.offsetTop, h: VideoElement.height, w: VideoElement.width,});
-    })
+        socket.emit('mouse_click', {press: 'u', button: e.button, h: VideoElement.height, w: VideoElement.width,});
+        e.preventDefault();
+    });
 
     document.addEventListener("keydown", (e) => {
         socket.emit('keyboard', {press: 'd',key: e.key, ctrl: e.ctrlKey, alt: e.altKey});
-    })
+        e.preventDefault();
+    });
 
     document.addEventListener("keyup", (e) => {
         socket.emit('keyboard', {press: 'u',key: e.key, ctrl: e.ctrlKey, alt: e.altKey});
-    })
+        e.preventDefault();
+    });
 
 });
 
