@@ -30,10 +30,20 @@ def get_res():
     res = stream.getRes()
     return jsonify({'x' : res[0], 'y' : res[1] })
 
-@socketio.on('m_k')
-def handle_my_custom_event(data):
+@socketio.on('mouse_move')
+def handle_mouse_move(data):
     r = stream.getRes()
-    controller.mouse(r,data)
+    controller.mouse_move(r,data)
+
+@socketio.on('mouse_click')
+def handle_mouse_click(data):
+    r = stream.getRes()
+    controller.mouse_click(r,data)
+
+
+@socketio.on('keyboard')
+def handle_key_press(data):
+    controller.press_key(data)
 
 if __name__ == "__main__":
     socketio.run(app, debug=True, host='0.0.0.0')
