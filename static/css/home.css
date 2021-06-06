@@ -8,6 +8,7 @@ body {
 #frame {
   width: 100vw;
   height: auto;
+  user-select: none;
 }
 
 header {

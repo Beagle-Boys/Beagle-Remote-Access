@@ -110,12 +110,18 @@ def handle_mouse_move(data):
 @socketio.on('mouse_click')
 def handle_mouse_click(data):
     r = stream.getRes()
-    controller.mouse_click(r,data)
+    if(data['press'] == 'd'):
+        controller.mouse_click_down(r, data)
+    else:
+        controller.mouse_click_up(r, data)
 
 
 @socketio.on('keyboard')
 def handle_key_press(data):
-    controller.press_key(data)
+    if(data['press'] == 'd'):
+        controller.press_key_down(data)
+    else:
+        controller.press_key_up(data)
 
 if __name__ == "__main__":
     socketio.run(app, debug=True, host='0.0.0.0')

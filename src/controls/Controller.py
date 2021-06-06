@@ -9,9 +9,16 @@ class Controller:
         pyautogui.moveTo(data['x'] * ( r[0] / data['w'] ), data['y'] * ( r[1] / data['h'] ) )
         pass
 
-    def mouse_click(self, r, data):
+    def mouse_click_up(self, r, data):
         key = ['left', 'middle', 'right']
-        pyautogui.click(data['x'] * ( r[0] / data['w'] ), data['y'] * ( r[1] / data['h'] ) , button=key[data['button']])
+        pyautogui.mouseUp(data['x'] * ( r[0] / data['w'] ), data['y'] * ( r[1] / data['h'] ) , button=key[data['button']])
 
-    def press_key(self, data):
-        pyautogui.press(data['key'])
+    def mouse_click_down(self, r, data):
+        key = ['left', 'middle', 'right']
+        pyautogui.mouseDown(data['x'] * ( r[0] / data['w'] ), data['y'] * ( r[1] / data['h'] ) , button=key[data['button']])
+
+    def press_key_up(self, data):
+        pyautogui.keyUp(data['key'])
+
+    def press_key_down(self, data):
+        pyautogui.keyDown(data['key'])

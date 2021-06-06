@@ -41,12 +41,19 @@ socket.on('connect', function() {
     });
 
     VideoElement.addEventListener("mousedown", (e)=> {
-        socket.emit('mouse_click', {button: e.button, x: e.clientX - VideoElement.offsetLeft, y: e.clientY - VideoElement.offsetTop, h: VideoElement.height, w: VideoElement.width,});
+        socket.emit('mouse_click', {press: 'd', button: e.button, x: e.clientX - VideoElement.offsetLeft, y: e.clientY - VideoElement.offsetTop, h: VideoElement.height, w: VideoElement.width,});
+    })
+
+    VideoElement.addEventListener("mouseup", (e)=> {
+        socket.emit('mouse_click', {press: 'u', button: e.button, x: e.clientX - VideoElement.offsetLeft, y: e.clientY - VideoElement.offsetTop, h: VideoElement.height, w: VideoElement.width,});
     })
 
     document.addEventListener("keydown", (e) => {
-        socket.emit('keyboard', {key: e.key, ctrl: e.ctrlKey, alt: e.altKey});
-        console.log(e);
+        socket.emit('keyboard', {press: 'd',key: e.key, ctrl: e.ctrlKey, alt: e.altKey});
+    })
+
+    document.addEventListener("keyup", (e) => {
+        socket.emit('keyboard', {press: 'u',key: e.key, ctrl: e.ctrlKey, alt: e.altKey});
     })
 
 });
@@ -54,3 +61,5 @@ socket.on('connect', function() {
 document.addEventListener("contextmenu", (e) => {
     e.preventDefault();
 });
+
+VideoElement.setAttribute('draggable', false); 
